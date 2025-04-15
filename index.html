@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Self-Care Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal glass-effect">
+      <div class="modal-content login-modal">
+        <div class="modal-header">
+          <i class="fas fa-lock"></i>
+          <h3>Welcome Back</h3>
+          <p class="login-subtitle">Sign in to continue your wellness journey</p>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <div class="input-icon-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" required placeholder="Enter your username">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-icon-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" required placeholder="Enter your password">
+                <button type="button" id="togglePassword" class="toggle-password">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="login-error" id="loginError"></div>
+            <button type="submit" class="primary-btn">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="app" class="hidden">
+      <header>
+        <div class="header-content glass-effect">
+          <div class="header-title">
+            <h1>Self-Care Companion</h1>
+            <p>Your daily wellness journey starts here</p>
+          </div>
+          <button id="signOutBtn" class="sign-out-btn">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="reminders-section glass-effect">
+          <div class="section-header">
+            <h2><i class="fas fa-bell"></i> Set New Reminder</h2>
+          </div>
+          <form id="reminderForm">
+            <div class="input-icon-group">
+              <i class="fas fa-tasks"></i>
+              <input type="text" id="reminderTitle" placeholder="Reminder Title" required>
+            </div>
+            <div class="input-icon-group">
+              <i class="fas fa-tag"></i>
+              <select id="reminderType" required>
+                <option value="" disabled selected>Select reminder type</option>
+                <option value="hydration">Hydration</option>
+                <option value="meditation">Meditation</option>
+                <option value="exercise">Exercise</option>
+                <option value="break">Take a Break</option>
+                <option value="medicine">Medicine</option>
+                <option value="sleep">Sleep</option>
+              </select>
+            </div>
+            <div class="input-icon-group">
+              <i class="fas fa-clock"></i>
+              <input type="time" id="reminderTime" required>
+            </div>
+            <div class="input-icon-group">
+              <i class="fas fa-comment"></i>
+              <textarea id="reminderNotes" placeholder="Additional notes (optional)"></textarea>
+            </div>
+            <button type="submit" class="primary-btn">
+              <i class="fas fa-plus"></i> Add Reminder
+            </button>
+          </form>
+        </section>
+
+        <section class="active-reminders glass-effect">
+          <div class="section-header">
+            <h2><i class="fas fa-list-check"></i> Active Reminders</h2>
+          </div>
+          <div class="filters">
+            <button class="filter-btn active" data-type="all">All</button>
+            <button class="filter-btn" data-type="hydration">
+              <i class="fas fa-glass-water"></i> Hydration
+            </button>
+            <button class="filter-btn" data-type="meditation">
+              <i class="fas fa-spa"></i> Meditation
+            </button>
+            <button class="filter-btn" data-type="exercise">
+              <i class="fas fa-dumbbell"></i> Exercise
+            </button>
+            <button class="filter-btn" data-type="break">
+              <i class="fas fa-coffee"></i> Breaks
+            </button>
+            <button class="filter-btn" data-type="medicine">
+              <i class="fas fa-pills"></i> Medicine
+            </button>
+            <button class="filter-btn" data-type="sleep">
+              <i class="fas fa-moon"></i> Sleep
+            </button>
+          </div>
+          <div id="remindersList" class="reminders-grid"></div>
+        </section>
+
+        <section class="water-tracker glass-effect">
+          <div class="section-header">
+            <h2><i class="fas fa-droplet"></i> Water Intake</h2>
+          </div>
+          <div class="water-container">
+            <div class="water-progress">
+              <div class="water-goal">
+                <span id="waterCount">0</span>/<span id="waterGoal">8</span> glasses
+              </div>
+              <div class="water-visual">
+                <div class="water-level" id="waterLevel"></div>
+              </div>
+            </div>
+            <div class="water-controls">
+              <button id="decreaseWater" class="water-btn">
+                <i class="fas fa-minus"></i>
+              </button>
+              <div class="glass-counter">
+                <i class="fas fa-glass-water"></i>
+                <span id="glassCount">0</span> glasses
+              </div>
+              <button id="increaseWater" class="water-btn">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+            <div class="water-info">
+              <p>Daily Goal: 8 glasses (2L)</p>
+              <button id="updateWaterGoal" class="secondary-btn">
+                <i class="fas fa-cog"></i> Update Goal
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="mood-tracker glass-effect">
+          <div class="section-header">
+            <h2><i class="fas fa-face-smile"></i> Today's Mood</h2>
+          </div>
+          <div class="mood-container">
+            <div class="mood-options">
+              <button class="mood-btn" data-mood="great">
+                <i class="fas fa-laugh-beam"></i>
+                <span>Great</span>
+              </button>
+              <button class="mood-btn" data-mood="good">
+                <i class="fas fa-smile"></i>
+                <span>Good</span>
+              </button>
+              <button class="mood-btn" data-mood="okay">
+                <i class="fas fa-meh"></i>
+                <span>Okay</span>
+              </button>
+              <button class="mood-btn" data-mood="bad">
+                <i class="fas fa-frown"></i>
+                <span>Bad</span>
+              </button>
+              <button class="mood-btn" data-mood="awful">
+                <i class="fas fa-sad-tear"></i>
+                <span>Awful</span>
+              </button>
+            </div>
+            <div class="mood-summary glass-effect">
+              <div class="mood-header" id="moodHistoryHeader">
+                <h3>Mood History</h3>
+                <button class="toggle-history">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+              <div class="mood-history collapsed" id="moodHistory"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="daily-tip glass-effect">
+          <div class="section-header">
+            <h2><i class="fas fa-lightbulb"></i> Daily Self-Care Tip</h2>
+          </div>
+          <div class="tip-card">
+            <p id="tipText"></p>
+            <button onclick="generateNewTip()" class="tip-refresh">
+              <i class="fas fa-sync-alt"></i> New Tip
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <div id="notification" class="notification hidden">
+        <i class="notification-icon"></i>
+        <p class="notification-text"></p>
+      </div>
+
+      <!-- Reminder Alert Modal -->
+      <div id="reminderModal" class="modal hidden">
+        <div class="modal-content glass-effect">
+          <div class="modal-header">
+            <i class="fas fa-bell"></i>
+            <h3>Reminder Alert</h3>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage"></p>
+          </div>
+          <div class="modal-footer">
+            <button id="snoozeReminder" class="secondary-btn">
+              <i class="fas fa-clock"></i> Snooze 5min
+            </button>
+            <button id="dismissReminder" class="primary-btn">
+              <i class="fas fa-check"></i> Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

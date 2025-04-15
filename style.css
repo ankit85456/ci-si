@@ -1,0 +1,924 @@
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #8b5cf6;
+    --background-color: #0f172a;
+    --card-background: #1e293b;
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent-color: #f472b6;
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    --border-color: #334155;
+    --hover-color: #2d3748;
+    --gradient-start: #6366f1;
+    --gradient-end: #8b5cf6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: var(--card-background);
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+section {
+    background: var(--card-background);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Form Styles */
+form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+input, select, textarea {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    width: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+button {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px -1px rgba(99, 102, 241, 0.3);
+}
+
+/* Reminder Cards */
+.reminder-card {
+    background: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.reminder-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.reminder-type-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    font-size: 1.2rem;
+}
+
+.reminder-card h3 {
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.reminder-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.reminder-notes {
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.reminder-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.reminder-actions button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--background-color);
+}
+
+.reminder-actions button:hover {
+    background: var(--hover-color);
+}
+
+.reminder-actions .delete-btn {
+    color: var(--error-color);
+}
+
+.reminder-actions button.active {
+    color: var(--success-color);
+}
+
+/* Filter Buttons */
+.filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    background: var(--hover-color);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Habit Tracker */
+.habit-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.streak-info, .completion-rate {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.streak-info h3, .completion-rate h3 {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#currentStreak, #completionRate {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+#habitsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.habit-cell {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.habit-cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+}
+
+.habit-cell i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.habit-cell.completed {
+    background-color: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+
+.habit-cell.completed i {
+    color: white;
+}
+
+.streak-count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+/* Daily Tip */
+.tip-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+.tip-card i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+#tipText {
+    margin: 1rem 0;
+    color: var(--text-color);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    background: var(--card-background);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.notification.warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.notification.info {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+}
+
+.notification.hidden {
+    display: none;
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+}
+
+/* Empty States */
+.no-reminders {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #app {
+        padding: 1rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    .mood-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .water-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .filters {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    #habitsGrid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .reminder-card {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .reminder-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* Mood Tracker */
+.mood-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mood-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.mood-btn {
+    background: var(--card-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.mood-btn:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+}
+
+.mood-btn.selected {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-color: transparent;
+}
+
+.mood-summary {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.mood-history {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mood-entry {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mood-entry:hover {
+    transform: translateX(5px);
+    border-color: var(--primary-color);
+}
+
+.mood-entry .mood-emoji {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-color);
+    border-radius: 50%;
+}
+
+.mood-entry .mood-details {
+    flex: 1;
+}
+
+.mood-entry .mood-time {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.mood-entry .mood-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* Water Tracker */
+.water-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.water-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.water-goal {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.water-visual {
+    height: 50px;
+    background: var(--background-color);
+    border-radius: 25px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.water-level {
+    height: 100%;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    width: 0%;
+    transition: width 0.5s ease;
+    position: relative;
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.water-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.water-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.water-btn:hover {
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+}
+
+.glass-counter {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.glass-counter i {
+    color: var(--primary-color);
+}
+
+.water-info {
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--card-background);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.secondary-btn {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.secondary-btn:hover {
+    background: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+.primary-btn {
+    background: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background: var(--secondary-color);
+}
+
+/* Login Modal Styles */
+.login-modal {
+    background: var(--card-background);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    max-width: 450px !important;
+}
+
+.login-modal .modal-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.login-modal .modal-header i {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.login-modal .modal-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.login-error {
+    color: var(--error-color);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    min-height: 20px;
+}
+
+#loginModal {
+    opacity: 1;
+    visibility: visible;
+    background: var(--background-color);
+}
+
+#loginModal .modal-content {
+    transform: none;
+}
+
+/* Add to your existing styles */
+.hidden {
+    display: none !important;
+}
+
+/* Sign Out Button */
+.sign-out-btn {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.sign-out-btn:hover {
+    background: linear-gradient(135deg, #ef4444, #f43f5e);
+    border-color: transparent;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Password Input Group */
+.password-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-group input {
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px;
+    width: auto;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+    background: none;
+    transform: none;
+}
+
+/* Glass Morphism */
+.glass-effect {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mood-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mood-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.toggle-history {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    width: auto;
+    height: auto;
+}
+
+.toggle-history i {
+    transition: transform 0.3s ease;
+}
+
+.toggle-history:hover {
+    color: var(--primary-color);
+    background: none;
+    transform: none;
+    box-shadow: none;
+}
+
+.mood-history {
+    max-height: 500px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    opacity: 1;
+    padding: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--card-background);
+}
+
+.mood-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mood-history::-webkit-scrollbar-track {
+    background: var(--card-background);
+}
+
+.mood-history::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}
+
+.mood-history.collapsed {
+    max-height: 0;
+    padding: 0 1rem;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.mood-header.active .toggle-history i {
+    transform: rotate(180deg);
+}
+
+/* Update existing mood entry styles */
+.mood-entry {
+    margin-bottom: 0.75rem;
+    animation: slideDown 0.3s ease forwards;
+}
+
+.mood-entry:last-child {
+    margin-bottom: 0;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Update mood summary styles */
+.mood-summary {
+    background: var(--card-background);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mood-summary h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
