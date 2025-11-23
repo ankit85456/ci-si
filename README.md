@@ -1,2 +1,2 @@
-# ci-si
+# self-care 
 genai
